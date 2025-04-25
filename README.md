@@ -23,16 +23,11 @@ This is a minimal and peaceful React project for a mindfulness app. It is design
 
 ### Backend
 
-1. Create a virtual environment (optional but recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate # On Windows, use `venv\Scripts\activate`
-   ```
-3. Install the backend dependencies:
+1. Install the backend dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-4. Start the backend server:
+2. Start the backend server:
    ```bash
    python main.py
    ```
