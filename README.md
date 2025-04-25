@@ -1,6 +1,6 @@
 # Mindfulness App
 
-90% Vibes 10% Genius
+90% Vibes, 10% Genius, 100% Alignment
 
 This is a minimal and peaceful React project for a mindfulness app. It is designed to provide a calming user experience.
 
