@@ -11,19 +11,16 @@ This is a minimal and peaceful React project for a mindfulness app. It is design
 
 ### Frontend
 
-1. Navigate to the `App` directory:
-   ```bash
-   cd App
-   ```
-2. Install the frontend dependencies:
+
+1. Install the frontend dependencies:
    ```bash
    npm install
    ```
-3. Start the development server:
+2. Start the development server:
    ```bash
    npm run dev
    ```
-4. Open your browser and navigate to the provided local development URL.
+3. Open your browser and navigate to the provided local development URL.
 
 ### Backend
 
