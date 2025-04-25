@@ -1,0 +1,158 @@
+/* General layout improvements for a minimal and peaceful design */
+body {
+  font-family: 'Arial, sans-serif';
+  background-color: #dac3a9; /* Light beige background */
+  color: #3e4640; /* Dark gray text */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  background: #b59a7f; /* Medium beige background for container */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 600px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+  color: #3e4640; /* Dark gray heading */
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 1.5em;
+  color: #60655d; /* Medium gray text */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em; /* Spacing between input and button */
+}
+
+input[type="text"] {
+  height: 2.4em;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  font-family: inherit;
+}
+
+/* Flip the button colors for hover and default states */
+button {
+  height: 2.4em;
+  padding: 0 1.2em;
+  font-size: 1em;
+  font-family: inherit;
+  color: #dac3a9; /* Light beige text */
+  background-color: #60655d; /* Medium gray button background */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 1em 0; /* Add equal vertical spacing between buttons */
+}
+
+/* Ensure consistent size for Get Guidance, Show Guidance, and Show Video buttons */
+button:nth-of-type(1),
+button:nth-of-type(2),
+button:nth-of-type(3) {
+  width: 100%; /* Make buttons the same width */
+  max-width: 300px; /* Optional: Limit the maximum width */
+}
+
+button:hover {
+  background-color: #9c9078; /* Olive beige on hover */
+}
+
+button:disabled {
+  background-color: #9c9078; /* Olive beige background for better contrast */
+  color: #3e4640; /* Dark gray text for visibility */
+  cursor: not-allowed;
+}
+
+.guidance {
+  margin-top: 2em;
+  text-align: left;
+  background: #dac3a9; /* Light beige background for guidance */
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #3e4640; /* Dark gray text */
+}
+
+/* Make the SAVE button significantly smaller */
+.guidance button:last-of-type {
+  width: 40%; /* Reduce the width further */
+  max-width: 100px; /* Optional: Limit the maximum width */
+}
+
+.notes {
+  margin-top: 2em;
+  text-align: left;
+}
+
+.notes ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.notes li {
+  background: #b59a7f; /* Medium beige background for notes */
+  margin-bottom: 1em;
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #3e4640; /* Dark gray text */
+}
+
+.notes li h3 {
+  margin: 0 0 0.5em;
+  font-size: 1.2em;
+  color: #4a4a4a;
+}
+
+.notes li p {
+  margin: 0.5em 0;
+  color: #666;
+}
+
+.notes li button {
+  background-color: #60655d; /* Medium gray button background */
+  color: #dac3a9; /* Light beige text */
+  border: none;
+  border-radius: 8px;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.notes li button:hover {
+  background-color: #9c9078; /* Olive beige on hover */
+}
+
+/* Make the SHOW NOTES and HIDE NOTES buttons significantly smaller */
+.notes button {
+  width: 40%; /* Reduce the width further */
+  max-width: 100px; /* Optional: Limit the maximum width */
+}
+
+iframe {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
