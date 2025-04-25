@@ -4,8 +4,8 @@ This is a minimal and peaceful React project for a mindfulness app. It is design
 
 ## Prerequisites
 
-- Node.js and npm installed (for the frontend)
-- Python installed (for the backend)
+- Node.js and npm installed (for the frontend) -> https://nodejs.org/en/download
+- Python installed (for the backend) 
 
 ## Setup Instructions
 
