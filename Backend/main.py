@@ -1,30 +1,21 @@
 import os
 from dotenv import load_dotenv
-# We'll primarily use ChatGroq directly, simpler than init_chat_model for this
-# from langchain.chat_models import init_chat_model # No longer needed
 from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_groq import ChatGroq
 from langchain_core.messages import SystemMessage, HumanMessage
-# requests and beautifulsoup are less relevant for finding mindfulness *practices* directly,
-# we'll rely more on search and the LLM's knowledge + synthesis.
-# import requests # No longer needed
-# from bs4 import BeautifulSoup # No longer needed
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 # Load environment variables
 load_dotenv()
 
-# Initialize tools
-# The LLM will be our calm, knowledgeable mindfulness teacher
-# Using a specific model name like 'llama3-8b-8192' is good practice
+
 try:
     groq_api_key = os.environ["GROQ_API_KEY"]
     mindfulness_teacher_llm = ChatGroq(
         api_key=groq_api_key,
-        model="llama-3.1-8b-instant", # Or 'llama3-8b-8192', instant models are often good for chat
-        temperature=0.7, # Allow a little creativity for compassionate wording
-        timeout=None,
+        model="llama-3.1-8b-instant", 
+        temperature=0.7, #creative writing
         max_retries=2,
     )
 except KeyError:
@@ -32,12 +23,12 @@ except KeyError:
     print("Please make sure you have a .env file with GROQ_API_KEY=your_key")
     exit() # Exit if the API key is missing
 
-# DuckDuckGo will be our resource finder - looking for relevant mindfulness info
+# DuckDuckGo will look for relevant mindful stuff
 mindfulness_search = DuckDuckGoSearchRun()
 
 def find_mindfulness_resources(user_intention: str) -> str:
     """Search for mindfulness practices or wisdom based on user's intention."""
-    # Instead of specific URLs, we search for general information related to the feeling/need
+    #Instead of specific URLs, search for general information related to the feeling/need
     search_queries = [
         f"mindfulness exercises for {user_intention}",
         f"breathing techniques for {user_intention}",
@@ -49,7 +40,7 @@ def find_mindfulness_resources(user_intention: str) -> str:
     print(f"\nOkay, I understand you're seeking a moment of peace related to '{user_intention}'.")
     print("Let me gently search for some relevant resources...")
 
-    # Try a few searches to gather different perspectives
+    #Try a few searches to gather different perspectives
     for query in search_queries:
         try:
             print(f"Searching for: {query}")
@@ -67,7 +58,7 @@ def find_mindfulness_resources(user_intention: str) -> str:
 def generate_mindfulness_guidance(user_intention: str, search_info: str) -> str:
     """Synthesize search info and user intention into compassionate guidance."""
 
-    # The LLM's system message defines its persona and task
+    #The LLM's system message defines its persona and task
     system_message_content = """
     You are a gentle, calm, and compassionate mindfulness teacher.
     Your purpose is to help the user find a moment of peace, focus, or calm based on their current state or intention.
