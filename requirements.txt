@@ -4,3 +4,4 @@ dotenv
 langchain-community-tools
 groq-langchain
 langchain-core
+langchain
