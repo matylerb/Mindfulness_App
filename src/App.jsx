@@ -15,7 +15,7 @@ function App() {
     e.preventDefault();
     setLoading(true);
     setGuidance('');
-    setVideoUrl(''); // Clear previous video URL
+    setVideoUrl('');
 
     try {
       const response = await fetch('http://localhost:5000/mindfulness', {
@@ -29,24 +29,8 @@ function App() {
       const data = await response.json();
       if (response.ok) {
         setGuidance(data.guidance);
+        setVideoUrl(''); // Clear video URL logic related to user feelings
 
-        // Map feelings to specific YouTube videos
-        const videoMap = {
-          stressed: 'https://www.youtube.com/embed/tybOi4hjZFQ',
-          happy: 'https://www.youtube.com/embed/d-diB65scQU',
-          sad: 'https://www.youtube.com/embed/2Vv-BfVoq4g',
-          calm: 'https://www.youtube.com/embed/5qap5aO4i9A',
-        };
-
-        // Find a video based on the user's intention
-        const lowerCaseIntention = intention.toLowerCase();
-        const selectedVideo = Object.keys(videoMap).find((key) =>
-          lowerCaseIntention.includes(key)
-        );
-
-        setVideoUrl(videoMap[selectedVideo] || ''); // Set the video URL or clear it if no match
-
-        // Generate a new random button for the user's input
         const newButton = document.createElement('button');
         newButton.textContent = intention || 'Click Me for Guidance';
         newButton.style.position = 'absolute';
@@ -61,7 +45,6 @@ function App() {
         newButton.style.cursor = 'pointer';
         newButton.style.zIndex = '10';
 
-        // Add drag-and-drop functionality
         let isDragging = false;
         let offsetX, offsetY;
 
@@ -75,7 +58,7 @@ function App() {
           if (isDragging) {
             newButton.style.left = `${e.clientX - offsetX}px`;
             newButton.style.top = `${e.clientY - offsetY}px`;
-            newButton.style.transform = 'none'; // Disable centering during drag
+            newButton.style.transform = 'none';
           }
         });
 
@@ -83,9 +66,7 @@ function App() {
           isDragging = false;
         });
 
-        // Ensure the collapse button hides the guidance box and shows the original button
         newButton.addEventListener('click', () => {
-          // Remove any existing guidance box for this button
           const existingGuidance = document.querySelector(`[data-guidance-for="${intention}"]`);
           if (existingGuidance) {
             existingGuidance.remove();
@@ -101,21 +82,17 @@ function App() {
           guidanceElement.style.padding = '1em';
           guidanceElement.style.borderRadius = '8px';
           guidanceElement.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-          guidanceElement.style.maxWidth = '500px'; // Limit width
-          guidanceElement.style.maxHeight = '500px'; // Limit height
-          guidanceElement.style.overflow = 'auto'; // Add scroll if content exceeds box size
-          guidanceElement.style.cursor = 'move'; // Indicate draggable
-          guidanceElement.style.pointerEvents = 'none'; // Ensure the guidance box is not draggable
+          guidanceElement.style.maxWidth = '500px';
+          guidanceElement.style.maxHeight = '500px';
+          guidanceElement.style.overflow = 'auto';
+          guidanceElement.style.cursor = 'move';
+          guidanceElement.style.pointerEvents = 'none';
           guidanceElement.textContent = data.guidance || 'No guidance available';
           guidanceElement.setAttribute('data-guidance-for', intention);
 
-          // Enable scrolling within the guidance box
           guidanceElement.style.overflowY = 'auto';
-
-          // Ensure buttons inside the guidance box are interactive
           guidanceElement.style.pointerEvents = 'auto';
 
-          // Prevent buttons from opening on drag
           let isDragging = false;
 
           guidanceElement.addEventListener('mousedown', () => {
@@ -133,7 +110,6 @@ function App() {
             }
           });
 
-          // Add a collapse button to hide the guidance box
           const collapseButton = document.createElement('button');
           collapseButton.textContent = 'Collapse';
           collapseButton.style.marginTop = '1em';
@@ -146,17 +122,16 @@ function App() {
 
           collapseButton.addEventListener('click', () => {
             guidanceElement.remove();
-            newButton.style.display = 'block'; // Show the original button again
+            newButton.style.display = 'block';
           });
 
           guidanceElement.appendChild(collapseButton);
           document.body.appendChild(guidanceElement);
 
-          // Hide the button when the guidance box is displayed
           newButton.style.display = 'none';
         });
 
-        document.body.appendChild(newButton); // Add the new button to the DOM
+        document.body.appendChild(newButton);
       } else {
         setGuidance('Failed to fetch guidance. Please try again.');
       }
