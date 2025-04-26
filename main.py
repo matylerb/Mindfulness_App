@@ -15,7 +15,7 @@ try:
     mindfulness_teacher_llm = ChatGroq(
         api_key=groq_api_key,
         model="llama-3.1-8b-instant", 
-        temperature=0.7, #creative writing
+        temperature=0.3, #creative writing
         max_retries=2,
     )
 except KeyError:
