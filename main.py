@@ -20,14 +20,13 @@ try:
     )
 except KeyError:
     print("Error: GROQ_API_KEY not found in environment variables.")
-    print("Please make sure you have a .env file with GROQ_API_KEY=your_key")
     exit() # Exit if the API key is missing
 
 # DuckDuckGo will look for relevant mindful stuff
 mindfulness_search = DuckDuckGoSearchRun()
 
 def find_mindfulness_resources(user_intention: str) -> str:
-    """Search for mindfulness practices or wisdom based on user's intention."""
+    """Search for mindfulness practices or wisdom based on user's intention/input."""
     #Instead of specific URLs, search for general information related to the feeling/need
     search_queries = [
         f"mindfulness exercises for {user_intention}",
@@ -37,8 +36,8 @@ def find_mindfulness_resources(user_intention: str) -> str:
     ]
 
     all_search_results = ""
-    print(f"\nOkay, I understand you're seeking a moment of peace related to '{user_intention}'.")
-    print("Let me gently search for some relevant resources...")
+    print(f"\nOkay, I understand you're seeking information related to '{user_intention}'.")
+    print("Let me search for some relevant resources...")
 
     #Try a few searches to gather different perspectives
     for query in search_queries:
@@ -81,7 +80,7 @@ def generate_mindfulness_guidance(user_intention: str, search_info: str) -> str:
     Here is some information I found that might be relevant:
     {search_info}
 
-    Please offer gentle guidance or a simple practice to help them find a moment of peace.
+    Please offer guidance or a simple practice to help them find a moment of peace.
     """
 
     messages = [
@@ -99,8 +98,7 @@ def generate_mindfulness_guidance(user_intention: str, search_info: str) -> str:
 
 def guide_mindfulness_moment(user_intention: str):
     """Orchestrates finding resources and generating guidance."""
-    print("\nWelcome. Take a gentle breath. I am here to help you find a moment of calm.")
-
+    print("\n Finding your moment of calm...")
     # Step 1: Find potential resources based on the user's need
     raw_info = find_mindfulness_resources(user_intention)
 
