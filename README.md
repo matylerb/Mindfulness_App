@@ -7,7 +7,7 @@ This is a minimal and peaceful React project for a mindfulness app. It is design
 ## Prerequisites
 
 - Node.js and npm installed (for the frontend) -> https://nodejs.org/en/download
-- Python installed (for the backend) 
+- Python installed (for the backend) (version 3.13.1 is the one i'm using)
 
 ## Setup Instructions
 
@@ -21,7 +21,7 @@ This is a minimal and peaceful React project for a mindfulness app. It is design
    ```bash
    npm run dev
    ```
-3. Open your browser and navigate to the provided local development URL.
+3. Open your browser to the provided local development URL.
 
 ### Backend
 
@@ -41,7 +41,7 @@ This is a minimal and peaceful React project for a mindfulness app. It is design
 
 ## Notes
 
-- The backend requires a `.env` file with the following content:
+- The backend requires a `.env` file which is provided you just need to enter your own GROQ API key which can be found at https://console.groq.com/keys 
   ```
   GROQ_API_KEY=your_api_key_here
   ```
