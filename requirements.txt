@@ -1,7 +1,6 @@
-flask
-flask-cors
-dotenv
-langchain-community-tools
-groq-langchain
-langchain-core
-langchain
+Flask==3.1.0
+flask_cors==5.0.1
+langchain_community==0.3.23
+langchain_core==0.3.56
+langchain_groq==0.3.2
+python-dotenv==1.1.0
