@@ -1,3 +1,7 @@
+#program description: Backend for app, uses langchain, it is a mindfulness guidance teacher using Groq ai and duckduckgosearch
+#author: Tyler Brady
+#date: 30/04/2025
+
 import os
 from dotenv import load_dotenv
 from langchain_community.tools import DuckDuckGoSearchRun
@@ -9,22 +13,23 @@ from flask_cors import CORS
 # Load environment variables
 load_dotenv()
 
-
+#get api key for groq
 try:
     groq_api_key = os.environ["GROQ_API_KEY"]
     mindfulness_teacher_llm = ChatGroq(
         api_key=groq_api_key,
         model="llama-3.1-8b-instant", 
-        temperature=0.3, #creative writing
+        temperature=0.3, 
         max_retries=2,
     )
 except KeyError:
     print("Error: GROQ_API_KEY not found in environment variables.")
     exit() # Exit if the API key is missing
 
-# DuckDuckGo will look for relevant mindful stuff
-mindfulness_search = DuckDuckGoSearchRun()
-
+# DuckDuckGo will look for relevant mindful stuff on the internet#
+mindfulness_search = DuckDuckGoSearchRun()                       #
+                                                                 #                  
+#function to find the resources online                           #
 def find_mindfulness_resources(user_intention: str) -> str:
     """Search for mindfulness practices or wisdom based on user's intention/input."""
     #Instead of specific URLs, search for general information related to the feeling/need
@@ -53,7 +58,9 @@ def find_mindfulness_resources(user_intention: str) -> str:
         return "No specific online resources were found." # Return a simple message if search fails
 
     return all_search_results
+#end function
 
+#this is the prompt engineering part that tell groq how to answer according to the user input
 def generate_mindfulness_guidance(user_intention: str, search_info: str) -> str:
     """Synthesize search info and user intention into compassionate guidance."""
 
@@ -82,7 +89,7 @@ def generate_mindfulness_guidance(user_intention: str, search_info: str) -> str:
 
     Please offer guidance or a simple practice to help them find a moment of peace.
     """
-
+    #gets human message (input)
     messages = [
         SystemMessage(content=system_message_content),
         HumanMessage(content=human_message_content)
@@ -102,11 +109,13 @@ def guide_mindfulness_moment(user_intention: str):
     # Step 1: Find potential resources based on the user's need
     raw_info = find_mindfulness_resources(user_intention)
 
-    # Step 2: Use the LLM (the teacher) to synthesize and guide
+    #gives guidance
     final_guidance = generate_mindfulness_guidance(user_intention, raw_info)
 
     return final_guidance
+#end function
 
+#connects to the frontend
 app = Flask(__name__)
 CORS(app)
 
@@ -120,5 +129,7 @@ def mindfulness_endpoint():
     guidance = guide_mindfulness_moment(user_intention)
     return jsonify({'guidance': guidance})
 
+#run program
 if __name__ == "__main__":
     app.run(debug=True)
+#end program
